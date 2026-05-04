@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hamdan Arshad – Electrical Technician Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --surface2: #1a2236;
+    --accent: #f59e0b;
+    --accent2: #3b82f6;
+    --accent3: #10b981;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --border: rgba(255,255,255,0.07);
+    --glow: rgba(245,158,11,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+
+  /* ── GRID NOISE TEXTURE ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(245,158,11,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245,158,11,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(10,14,26,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    overflow: hidden;
+  }
+  .hero-bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+  }
+  .hbc1 { width: 600px; height: 600px; background: rgba(245,158,11,0.08); top: -100px; right: -100px; }
+  .hbc2 { width: 400px; height: 400px; background: rgba(59,130,246,0.06); bottom: 0; left: -50px; }
+
+  .hero-content { position: relative; z-index: 1; max-width: 900px; }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(245,158,11,0.1);
+    border: 1px solid rgba(245,158,11,0.25);
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    padding: 0.4rem 1rem;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.08em;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-tag::before { content: '▶'; font-size: 0.6rem; }
+
+  h1.hero-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 10vw, 8rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    color: var(--text);
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  h1.hero-name span { color: var(--accent); }
+
+  .hero-title {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--muted);
+    margin: 1.2rem 0 2rem;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-title strong { color: var(--accent2); font-weight: 500; }
+
+  .hero-bio {
+    max-width: 560px;
+    font-size: 1rem;
+    color: #94a3b8;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #0a0e1a;
+  }
+  .btn-primary:hover { background: #fbbf24; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(245,158,11,0.3); }
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  .hero-stats {
+    position: absolute;
+    right: 4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    animation: fadeLeft 0.8s 0.5s ease both;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    padding: 1.2rem 1.6rem;
+    min-width: 180px;
+  }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.3rem; }
+
+  /* ── SECTIONS ── */
+  section { position: relative; z-index: 1; padding: 6rem 4rem; }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    margin-bottom: 3rem;
+    color: var(--text);
+  }
+  .section-title em { color: var(--accent); font-style: normal; }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--surface); }
+  .exp-grid { display: flex; flex-direction: column; gap: 0; }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+  }
+  .exp-item.visible { opacity: 1; transform: translateY(0); }
+
+  .exp-meta { padding-right: 2rem; padding-top: 0.2rem; }
+  .exp-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+  .exp-location { font-size: 0.78rem; color: var(--muted); }
+
+  .exp-body {}
+  .exp-company {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+  .exp-role {
+    font-size: 0.85rem;
+    color: var(--accent2);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    margin-bottom: 1rem;
+  }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+  .exp-bullets li {
+    font-size: 0.88rem;
+    color: #94a3b8;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .exp-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 0.75rem; top: 0.1rem; }
+
+  /* ── SKILLS ── */
+  #skills {}
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.8rem;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+  }
+  .skill-card.visible { opacity: 1; transform: translateY(0); }
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  .skill-card.blue::before { background: var(--accent2); }
+  .skill-card.green::before { background: var(--accent3); }
+
+  .skill-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .skill-cat {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .skill-card.blue .skill-cat { color: var(--accent2); }
+  .skill-card.green .skill-cat { color: var(--accent3); }
+  .skill-name { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.8rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.6rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ── PROJECTS ── */
+  #projects { background: var(--surface); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+  .project-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+    cursor: default;
+  }
+  .project-card.visible { opacity: 1; transform: translateY(0); }
+  .project-card:hover { border-color: rgba(245,158,11,0.3); transform: translateY(-4px); }
+  .project-card:hover .proj-arrow { color: var(--accent); }
+  .proj-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; }
+  .proj-icon { font-size: 1.8rem; }
+  .proj-arrow { color: var(--muted); font-size: 1.2rem; transition: color 0.3s; }
+  .proj-title { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .proj-loc { font-size: 0.72rem; color: var(--accent); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.08em; margin-bottom: 0.8rem; }
+  .proj-desc { font-size: 0.84rem; color: #94a3b8; line-height: 1.7; }
+
+  /* ── EDUCATION ── */
+  #education {}
+  .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .edu-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 1.8rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+  }
+  .edu-card.visible { opacity: 1; transform: translateY(0); }
+  .edu-year { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 0.6rem; }
+  .edu-degree { font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .edu-school { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.6rem; }
+  .edu-grade {
+    display: inline-block;
+    background: rgba(16,185,129,0.1);
+    border: 1px solid rgba(16,185,129,0.25);
+    color: var(--accent3);
+    font-size: 0.72rem;
+    padding: 0.2rem 0.6rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--surface); text-align: center; }
+  .contact-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem; margin-top: 2rem; }
+  .contact-item {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+    min-width: 200px;
+    transition: all 0.3s;
+  }
+  .contact-item:hover { border-color: rgba(245,158,11,0.3); }
+  .contact-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .contact-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--muted); margin-bottom: 0.3rem; font-family: 'JetBrains Mono', monospace; }
+  .contact-val { font-size: 0.88rem; font-weight: 500; color: var(--text); }
+
+  .iqama-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(16,185,129,0.08);
+    border: 1px solid rgba(16,185,129,0.2);
+    color: var(--accent3);
+    padding: 0.6rem 1.4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    margin-top: 2.5rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 2rem 4rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeLeft {
+    from { opacity: 0; transform: translate(40px, -50%); }
+    to   { opacity: 1; transform: translate(0, -50%); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    section { padding: 4rem 1.5rem; }
+    #hero { padding: 7rem 1.5rem 4rem; }
+    .hero-stats { position: static; transform: none; flex-direction: row; flex-wrap: wrap; margin-top: 3rem; animation: fadeUp 0.6s 0.5s ease both; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .exp-meta { padding-right: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">H.ARSHAD</div>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-circle hbc1"></div>
+  <div class="hero-bg-circle hbc2"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Available for Hire · Riyadh, KSA · Valid Iqama</div>
+    <h1 class="hero-name">HAMDAN<br><span>ARSHAD</span></h1>
+    <p class="hero-title">Assistant Electrician &nbsp;·&nbsp; <strong>Emergency & Fire Systems</strong> &nbsp;·&nbsp; IT Student</p>
+    <p class="hero-bio">
+      Electrical technician based in Riyadh, Saudi Arabia with hands-on experience in emergency lighting, fire alarm systems, EMT conduit wiring, and CCTV installation on large-scale commercial projects. Currently pursuing BSCS — blending field expertise with growing IT knowledge.
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">⚡ Get In Touch</a>
+      <a href="#experience" class="btn btn-outline">View Experience ↓</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-card">
+      <div class="stat-num">14+</div>
+      <div class="stat-label">Months in KSA</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">5+</div>
+      <div class="stat-label">Years Field Work</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">A+</div>
+      <div class="stat-label">DAE Electrical</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">// 01 — Work History</p>
+  <h2 class="section-title">Professional <em>Experience</em></h2>
+  <div class="exp-grid">
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">Mar 2025 – Present</div>
+        <div class="exp-location">📍 Riyadh, Saudi Arabia</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-company">Nesma & Partners Contracting Co.</div>
+        <div class="exp-role">Assistant Electrician – Emergency & Fire Systems</div>
+        <ul class="exp-bullets">
+          <li>Installation of emergency lighting systems in Avenue Mall Riyadh (large-scale commercial project)</li>
+          <li>Fire alarm system installation, cable routing, and commissioning as per drawing specifications</li>
+          <li>EMT conduit piping and wiring installation following technical and shop drawings</li>
+          <li>CCTV system installation including cable management and device mounting</li>
+          <li>Worked alongside senior engineers ensuring compliance with Saudi electrical codes</li>
+          <li>Interpreted electrical layouts and schematics to execute precision installations</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">Jul 2024 – Feb 2025</div>
+        <div class="exp-location">📍 Lahore, Pakistan</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-company">Nishat Mills Ltd (Textile Division)</div>
+        <div class="exp-role">Electrical Maintenance Technician</div>
+        <ul class="exp-bullets">
+          <li>Preventive and corrective maintenance of industrial loom machines</li>
+          <li>Reading and diagnosing fault codes and error signals from loom control panels</li>
+          <li>Shed maintenance including wiring, electrical panels, and infrastructure inspection</li>
+          <li>Replaced faulty electrical and mechanical components to minimize machine downtime</li>
+          <li>Maintained maintenance logs and reported critical faults to supervisors</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">Nov 2021 – Mar 2022</div>
+        <div class="exp-location">📍 Lahore, Pakistan</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-company">Emporium Mall – Site Contract</div>
+        <div class="exp-role">Electrical Installer</div>
+        <ul class="exp-bullets">
+          <li>Electrical system installation and wiring for commercial retail spaces</li>
+          <li>Air conditioning unit installation and fault troubleshooting</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-date">2018 – 2019</div>
+        <div class="exp-location">📍 Lahore, Pakistan</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-company">Electrical & Mobile Repair Shop</div>
+        <div class="exp-role">Technician Assistant</div>
+        <ul class="exp-bullets">
+          <li>Domestic house wiring and electrical installations</li>
+          <li>Diagnosis and repair of home appliances and electronics</li>
+          <li>Mobile phone hardware repair</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">// 02 — Technical Profile</p>
+  <h2 class="section-title">Skills & <em>Expertise</em></h2>
+  <div class="skills-grid">
+
+    <div class="skill-card">
+      <div class="skill-icon">⚡</div>
+      <div class="skill-cat">Core Electrical</div>
+      <div class="skill-name">Emergency & Safety Systems</div>
+      <div class="skill-tags">
+        <span class="tag">Emergency Lighting</span>
+        <span class="tag">Fire Alarm Systems</span>
+        <span class="tag">EMT Conduit</span>
+        <span class="tag">CCTV Install</span>
+        <span class="tag">Panel Wiring</span>
+      </div>
+    </div>
+
+    <div class="skill-card blue">
+      <div class="skill-icon">🏭</div>
+      <div class="skill-cat">Industrial</div>
+      <div class="skill-name">Maintenance & Diagnostics</div>
+      <div class="skill-tags">
+        <span class="tag">Loom Machines</span>
+        <span class="tag">Fault Diagnosis</span>
+        <span class="tag">Error Code Reading</span>
+        <span class="tag">Preventive Maint.</span>
+        <span class="tag">Panel Inspection</span>
+      </div>
+    </div>
+
+    <div class="skill-card green">
+      <div class="skill-icon">📐</div>
+      <div class="skill-cat">Technical Reading</div>
+      <div class="skill-name">Drawings & Schematics</div>
+      <div class="skill-tags">
+        <span class="tag">Electrical Drawings</span>
+        <span class="tag">Shop Drawings</span>
+        <span class="tag">Site Plans</span>
+        <span class="tag">Wiring Layouts</span>
+      </div>
+    </div>
+
+    <div class="skill-card blue">
+      <div class="skill-icon">💻</div>
+      <div class="skill-cat">IT & Computer</div>
+      <div class="skill-name">Software & Digital Tools</div>
+      <div class="skill-tags">
+        <span class="tag">MS Office</span>
+        <span class="tag">Excel</span>
+        <span class="tag">Google Workspace</span>
+        <span class="tag">BSCS Student</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">🛡️</div>
+      <div class="skill-cat">Safety & Compliance</div>
+      <div class="skill-name">Site Safety Standards</div>
+      <div class="skill-tags">
+        <span class="tag">Saudi Site Safety</span>
+        <span class="tag">PPE Compliance</span>
+        <span class="tag">Safety Protocols</span>
+        <span class="tag">Risk Awareness</span>
+      </div>
+    </div>
+
+    <div class="skill-card green">
+      <div class="skill-icon">🌐</div>
+      <div class="skill-cat">Languages</div>
+      <div class="skill-name">Communication</div>
+      <div class="skill-tags">
+        <span class="tag">Urdu – Native</span>
+        <span class="tag">English – Professional</span>
+        <span class="tag">Arabic – Basic</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">// 03 — Key Projects</p>
+  <h2 class="section-title">Notable <em>Projects</em></h2>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="proj-header">
+        <div class="proj-icon">🏬</div>
+        <div class="proj-arrow">↗</div>
+      </div>
+      <div class="proj-title">Avenue Mall Riyadh</div>
+      <div class="proj-loc">Nesma & Partners · Riyadh, KSA · 2025</div>
+      <div class="proj-desc">Large-scale commercial mall project involving full emergency lighting installation, fire alarm system wiring and commissioning, EMT conduit piping per drawing, and CCTV system installation throughout the facility.</div>
+    </div>
+
+    <div class="project-card">
+      <div class="proj-header">
+        <div class="proj-icon">🏪</div>
+        <div class="proj-arrow">↗</div>
+      </div>
+      <div class="proj-title">Emporium Mall Lahore</div>
+      <div class="proj-loc">Site Contract · Lahore, Pakistan · 2021</div>
+      <div class="proj-desc">Electrical installation and wiring for a major commercial retail complex. Responsibilities included cable routing, circuit installation, and AC system troubleshooting across multiple retail units.</div>
+    </div>
+
+    <div class="project-card">
+      <div class="proj-header">
+        <div class="proj-icon">🏭</div>
+        <div class="proj-arrow">↗</div>
+      </div>
+      <div class="proj-title">Nishat Mills Production Floor</div>
+      <div class="proj-loc">Nishat Mills Ltd · Lahore, Pakistan · 2024–2025</div>
+      <div class="proj-desc">Industrial electrical maintenance across a large textile production floor. Kept loom machines operational through systematic fault diagnosis, error code interpretation, and rapid component replacement to prevent production downtime.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <p class="section-label">// 04 — Academic Background</p>
+  <h2 class="section-title"><em>Education</em></h2>
+  <div class="edu-grid">
+
+    <div class="edu-card">
+      <div class="edu-year">2023 – 2026 · IN PROGRESS</div>
+      <div class="edu-degree">B.Sc. Computer Science (BSCS)</div>
+      <div class="edu-school">Virtual University of Pakistan</div>
+      <span class="edu-grade">6th Semester · Ongoing</span>
+    </div>
+
+    <div class="edu-card">
+      <div class="edu-year">2019 – 2022 · COMPLETED</div>
+      <div class="edu-degree">DAE – Electrical Technology</div>
+      <div class="edu-school">Punjab Board of Technical Education<br>Govt. College of Technology, Lahore</div>
+      <span class="edu-grade">Grade: A+</span>
+    </div>
+
+    <div class="edu-card">
+      <div class="edu-year">2017 – 2019 · COMPLETED</div>
+      <div class="edu-degree">Matric – Computer Science</div>
+      <div class="edu-school">City District Govt. Boys High School, Lahore</div>
+      <span class="edu-grade">1st Division</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">// 05 — Get In Touch</p>
+  <h2 class="section-title">Contact <em>Me</em></h2>
+  <p style="color:#94a3b8;font-size:0.95rem;max-width:500px;margin:0 auto;">Currently based in Riyadh, Saudi Arabia and open to new opportunities. Reach out via phone or email.</p>
+
+  <div class="contact-grid">
+    <div class="contact-item">
+      <div class="contact-icon">📱</div>
+      <div class="contact-label">KSA Mobile</div>
+      <div class="contact-val">+966 599 803 723</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">📞</div>
+      <div class="contact-label">Pakistan Mobile</div>
+      <div class="contact-val">+92 321 205 9547</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">✉️</div>
+      <div class="contact-label">Email</div>
+      <div class="contact-val">hamdan.arshad.7777<br>@gmail.com</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">📍</div>
+      <div class="contact-label">Location</div>
+      <div class="contact-val">Riyadh, Saudi Arabia</div>
+    </div>
+  </div>
+
+  <div class="iqama-badge">✅ Valid Iqama &nbsp;|&nbsp; ID: 2600684860 &nbsp;|&nbsp; Immediately Available</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  © 2025 Hamdan Arshad &nbsp;·&nbsp; Assistant Electrician &nbsp;·&nbsp; Riyadh, KSA
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.exp-item, .skill-card, .project-card, .edu-card').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
